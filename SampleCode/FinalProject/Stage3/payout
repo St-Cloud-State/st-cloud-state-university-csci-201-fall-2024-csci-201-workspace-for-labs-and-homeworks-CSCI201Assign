@@ -1,0 +1,24 @@
+Name:   john
+Id:   axp15
+Salary:  416
+Withholding:   124.8
+Net Pay:   291.2
+-------------------------------------------------
+Name:   james
+Id:   btr11
+Salary:  -15
+Withholding:   -4.5
+Net Pay:   -10.5
+-------------------------------------------------
+Name:   john
+Id:   ppt14
+Salary:  600
+Withholding:   60
+Net Pay:   540
+-------------------------------------------------
+Name:   bertha
+Id:   tpt19
+Salary:  680
+Withholding:   136
+Net Pay:   544
+-------------------------------------------------

@@ -1,0 +1,110 @@
+bucket 0 size 1
+13320 
+bucket 1 size 0
+
+bucket 2 size 1
+2432 
+bucket 3 size 6
+58963 963 3 71893 2143 9123 
+bucket 4 size 0
+
+bucket 5 size 3
+185 185 31205 
+bucket 6 size 4
+226 226 226 7456 
+bucket 7 size 4
+17 117 3017 117 
+bucket 8 size 1
+1148 
+bucket 9 size 0
+
+round 1
+13320 2432 58963 963 3 71893 2143 9123 185 185 31205 226 226 226 7456 17 117 3017 117 1148 
+bucket 0 size 2
+3 31205 
+bucket 1 size 4
+17 117 3017 117 
+bucket 2 size 5
+13320 9123 226 226 226 
+bucket 3 size 1
+2432 
+bucket 4 size 2
+2143 1148 
+bucket 5 size 1
+7456 
+bucket 6 size 2
+58963 963 
+bucket 7 size 0
+
+bucket 8 size 2
+185 185 
+bucket 9 size 1
+71893 
+round 2
+3 31205 17 117 3017 117 13320 9123 226 226 226 2432 2143 1148 7456 58963 963 185 185 71893 
+bucket 0 size 3
+3 17 3017 
+bucket 1 size 7
+117 117 9123 2143 1148 185 185 
+bucket 2 size 4
+31205 226 226 226 
+bucket 3 size 1
+13320 
+bucket 4 size 2
+2432 7456 
+bucket 5 size 0
+
+bucket 6 size 0
+
+bucket 7 size 0
+
+bucket 8 size 1
+71893 
+bucket 9 size 2
+58963 963 
+round 3
+3 17 3017 117 117 9123 2143 1148 185 185 31205 226 226 226 13320 2432 7456 71893 58963 963 
+bucket 0 size 10
+3 17 117 117 185 185 226 226 226 963 
+bucket 1 size 3
+1148 31205 71893 
+bucket 2 size 2
+2143 2432 
+bucket 3 size 2
+3017 13320 
+bucket 4 size 0
+
+bucket 5 size 0
+
+bucket 6 size 0
+
+bucket 7 size 1
+7456 
+bucket 8 size 1
+58963 
+bucket 9 size 1
+9123 
+round 4
+3 17 117 117 185 185 226 226 226 963 1148 31205 71893 2143 2432 3017 13320 7456 58963 9123 
+bucket 0 size 16
+3 17 117 117 185 185 226 226 226 963 1148 2143 2432 3017 7456 9123 
+bucket 1 size 1
+13320 
+bucket 2 size 0
+
+bucket 3 size 1
+31205 
+bucket 4 size 0
+
+bucket 5 size 1
+58963 
+bucket 6 size 0
+
+bucket 7 size 1
+71893 
+bucket 8 size 0
+
+bucket 9 size 0
+
+round 5
+3 17 117 117 185 185 226 226 226 963 1148 2143 2432 3017 7456 9123 13320 31205 58963 71893 

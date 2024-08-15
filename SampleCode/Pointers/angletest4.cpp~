@@ -1,0 +1,45 @@
+//This is the application program. Compile at the
+// very end with the command "g++ angletest.cpp angle.o"
+
+
+#include <iostream>  
+#include "angle.h"
+#include <fstream>
+#include <cstring>
+
+using namespace std;
+
+int main()
+{
+
+  // Abusing pointers to violate type safety and program integrity 
+  // through pointer arithmetic
+
+  int a; float b; int c; 
+  cout << "a at: " << &a << endl;
+  cout << "b at: " << &b << endl;
+  cout << "c at: " << &c << endl;
+
+  a = 3; b = 2.5; c = 4;
+
+  cout << "a is: " << a << endl;
+
+  float *pb = &b; // pb has the address of b
+
+   *pb = 26.68; // b is being changed
+   cout << "b is: " << b << endl;
+
+  *(pb+1) = 15.53; // pb+1 is the address of a; we are changing 
+                   // a to 15.53!!!
+
+  cout << "a is: " << a << endl;
+
+  cout << "b is: " << b << endl;
+
+  int *pa = &a;
+
+  *(pa-1) = 17; // pa-1 is the address of b; we are changing 
+                // b to 17
+  cout << "b is: " << b << endl;
+}
+

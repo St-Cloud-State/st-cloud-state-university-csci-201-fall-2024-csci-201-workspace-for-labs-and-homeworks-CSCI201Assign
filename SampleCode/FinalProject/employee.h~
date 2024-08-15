@@ -1,0 +1,101 @@
+#include <iostream>  
+#include <fstream>  
+#include <cstring>  
+#include <iomanip> 
+#ifndef EMPLOYEE
+#define EMPLOYEE 
+using namespace std;  
+
+
+class employee{
+
+  const int nameLength = 20;   
+  const int idLength = 9; // 8-character Id  
+  
+
+  
+ private:
+  char name[nameLength];  
+  char id[idLength];  
+  int deductions;  
+  float hrlyWage;  
+  float Salary;  
+  float withholding, netSalary, hrsWorked[5];  
+  
+  
+  float computeSalary(float wage, float hours)  
+    {  
+      return wage*hours;  
+    }  
+  
+  float computeWithholding(float salary, int deductions)  
+    {  
+    
+      // code to compute withholding applying tax rules.  
+      float withholding = salary*deductions/10;;  
+      return withholding;  
+    }  
+  
+  
+  
+ public:
+  
+  
+  
+  void processEmployee()  
+    {  
+      
+      float hours;  
+      
+      hours =  hrsWorked[0] + hrsWorked[1] +  
+	hrsWorked[2]+ hrsWorked[3]+ hrsWorked[4];  
+      Salary = computeSalary(hrlyWage, hours);  
+      withholding = computeWithholding(Salary, deductions);  
+      netSalary = Salary-withholding;  
+    }  
+  
+  void changeWage(float wage)  
+    {  
+      hrlyWage = wage;
+    }    
+  
+  void printPersonalInfo(ostream& outfile)  
+    {  
+      // prints a multi-line report 
+      // listing all the fixed personal information  
+      
+      outfile <<  "Name:   "<<  name << endl  
+	      <<  "Id:   "<<  id << endl   
+	      << "Hourly Wage:  " << hrlyWage << endl  
+	      << "Deductions:   " << deductions << endl  
+	      <<"-------------------------------------------------"<<endl 
+	      << endl;  
+    }  
+  
+  
+  
+  void printRecord( eostream& outfile)  
+    {  
+      // prints on one line with uniform field widths  
+      // describing the week's paycheque  
+      
+      outfile << setw(nameLength+2)<<  name   
+	      <<  setw(idLength+2) <<  id   
+	      << setw(10) << Salary   
+	      << setw(10) << withholding  
+	      << setw(10) << netSalary  << endl;   
+    }  
+  
+  void writeEmployee(  ostream& outfile)  
+    {
+      // saves the raw data to the specified stream
+      
+      char space = ' ';
+      outfile << name << space << id << space
+	      <<hrsWorked[0] << space << hrsWorked[1] << space  
+	      <<hrsWorked[2] << space << hrsWorked[3] << space 
+	      <<hrsWorked[4] << space << hrlyWage << space
+	      <<deductions << endl; 
+    } 
+};
+#endif

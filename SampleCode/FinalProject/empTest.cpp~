@@ -1,0 +1,62 @@
+//This is the application program. Compile at the
+// very end with the command "g++ empTest.cpp employee.o"
+
+#include <iostream>
+#include <fstream>
+#include <cstring>
+#include <iomanip>
+#include "employee.h"
+using namespace std;
+
+
+int main()
+{
+
+  employee emp1, emp2;
+  char name[employee::nameLength], id[employee::idLength];
+  float wage, amount; 
+  int deducts;
+
+  cout << "Input name for employee1: " ;
+  cin >> name;
+
+  cout << "Input id for employee1: " ;
+  cin >> id;
+
+  cout << "Input wage for employee1: " ;
+  cin >> wage;
+
+  cout << "Input deductions for employee1: " ;
+  cin >> deducts;
+
+  emp1.setName(name); emp1.setId(id);
+  emp1.setWage(wage); emp1.setDeductions(deducts);
+
+  cout << " Name is "<< emp1.getName() << endl;
+  cout << " Id is "<< emp1.getId() << endl; 
+
+  cout << " Personal Info: " << endl; 
+  emp1.printPersonalInfo(cout);
+
+
+  
+  cout << "withholding check; please input an amount: ";
+  cin >> amount;
+  cout << "withholding is " << emp1.computeWithholding(amount) 
+       << endl;
+
+  cout << "Payroll processing; input hours through keyboard " << endl;
+  emp1.processPayroll(cin);
+
+  cout << " Report: " << endl; 
+  emp1.printReport(cout);
+
+  cout << " Record: " << endl; 
+  emp1.printRecord(cout);
+
+  cout << " Saving data: " << endl; 
+  emp1.saveData(cout);
+
+  cout << endl;
+
+}

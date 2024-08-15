@@ -1,0 +1,16 @@
+#include "colorClass.h"
+#include <iostream>#include<string>
+using namespace std;
+
+
+
+
+int main()
+{ 
+   colorClass colorcounter();
+   cout << "Please input an alternating sequence of numbers and strings\n  starting with a number, ending in 0.\n";
+   
+
+   colorcounter.run(cin);
+   return 0;
+}

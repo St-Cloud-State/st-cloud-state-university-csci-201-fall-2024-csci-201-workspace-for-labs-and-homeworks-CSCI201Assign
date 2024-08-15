@@ -1,0 +1,102 @@
+// A payroll template C++ program
+
+#include <iostream>
+#include <fstream>
+#include <cstring>
+using namespace std;
+
+
+float computeHours(istream& infile)
+{
+  int hours; float total=0;
+  bool error= false;
+
+  for(int i=1; i <= 5; i++)
+    {
+      infile >> hours; 
+
+      //error check: hours should be between 0 and 16
+      // for each day of the week. Return -1.0 otherwise.
+      if ((hours < 0) || (hours > 16))
+         error = true;
+
+      total += hours;
+    }
+  if (error) 
+    return -1;
+  return total;
+}
+
+
+float computeSalary(float hours, istream& infile)
+{
+  float wage;
+  infile >> wage;
+  cout << " hours are " << hours << "  wage is " << wage << endl;
+  return 0.0;
+}  
+ 
+float computeWithholding(float salary, istream& infile)
+{
+  int deductions;
+  infile >> deductions;
+  cout << " deductions are " << deductions 
+       << "  salary is " << salary << endl;
+  return 0.0;
+}
+ 
+void printRecord (char name[20], char Id[20], float hours, float salary, float withholding, 
+		  float netSalary, ostream& outfile)
+{
+  outfile <<  "Name:   "<<  name << endl
+	  <<  "Id:   "<<  Id << endl
+          << " Hours  " << hours << endl
+	  << "Salary:  " << salary << endl
+	  << "Withholding:   " << withholding << endl
+	  << "Net Pay:   " << netSalary  << endl 
+	  <<"-------------------------------------------------"<<endl<< endl;
+}
+
+int main()
+{
+  ofstream outfile;
+  ifstream infile; 
+
+
+  char file_name[21], name[20], Id[20];
+
+  float  hoursWorked, salary, withholding, netSalary;
+  int deductions;
+
+  cout << "Please enter name of input file:  ";
+  cin >> file_name;
+  infile.open(file_name);
+  if ( !infile)
+    {
+      // abandons operation with error mesg
+      cout << "Could not open input file \n";
+      return 0;
+    }
+
+
+  outfile.open("PayrollResult");
+  if ( !outfile)
+    {
+      cout << "Could not open output file \n";
+      return 0;
+    }
+
+  do
+    {
+      infile >> name >> Id;
+      cout << name << " " << Id << endl;
+      hoursWorked = computeHours(infile);
+      salary = computeSalary(hoursWorked, infile);
+      withholding = computeWithholding(salary, infile);
+      printRecord(name, Id, hoursWorked, salary, withholding, 
+		  salary-withholding, outfile);
+    }
+  while(!infile.eof());
+
+  return 0;
+}

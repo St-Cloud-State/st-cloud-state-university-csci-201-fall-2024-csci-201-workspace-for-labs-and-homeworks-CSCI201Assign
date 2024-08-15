@@ -1,0 +1,4 @@
+                  john      axp15       416     124.8     291.2
+                 james      btr11       -15      -4.5     -10.5
+                  john      ppt14       600        60       540
+                bertha      tpt19       680       136       544

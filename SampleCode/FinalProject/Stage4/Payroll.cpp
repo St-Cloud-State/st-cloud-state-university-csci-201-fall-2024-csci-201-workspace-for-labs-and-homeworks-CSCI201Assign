@@ -1,0 +1,236 @@
+// A payroll template C++ program  
+  
+#include <iostream>  
+#include <fstream>  
+#include <cstring>  
+#include <string>
+#include <iomanip>  
+#include "employeeList.h"
+using namespace std;  
+  
+  
+
+  
+const int maxSize = 20; //at most 20 employees  
+
+
+// Import constants from employee class
+const int nameLength = employee::nameLength;   
+const int idLength = employee::idLength; // 8-character Id  
+
+
+employeeList empList(maxSize);  // define the employeeList object.
+// some more variables used only main  
+ofstream outfile;  
+ifstream infile;    
+char input_file_name[21], output_file_name[21], name[nameLength+1];
+string id;  
+  
+
+/*------------------------------------------------------------------------  
+  Functions used by main program and the user interface  
+  ------------------------------------------------------------------------*/  
+
+
+void showmenu()  
+{  
+  cout<< "Please type in  one of the following options: \n";  
+  cout<< "L or l  to load the employee list \n";  
+  cout<< "D or d  to display  the employee data \n";  
+  cout<< "P or p to process payroll\n";  
+  cout<< "C or c to change an employee's wage \n";  
+  cout<< "A or a to add a new employee \n";  
+  cout<< "S or s to search for a particular employee's information \n";  
+  cout<< "R or r to print the payroll results \n";  
+  cout<< "M or m to display this menu \n";  
+  cout<< "E or e to save and exit \n";  
+}  
+ 
+void loadEmployees()  
+{  
+  employee e_temp;  float hrsWorked[5];
+  int deductions; float hrlyWage;
+  cout << "Please enter name of the  data file:  ";  
+  cin >> input_file_name;  
+  infile.open(input_file_name);  
+  if ( !infile)  
+    {  
+      // abandons operation with error mesg  
+      cout << "Could not open input file \n";  
+      infile.close();  
+      infile.clear();  
+      return;  
+    }  
+  infile >> name; e_temp.setName(name);
+  while(!infile.eof())  
+    {  
+      infile >> id; e_temp.setId(id);  
+      // reads exactly 5 numbers for hours worked
+      infile >> hrsWorked[0] >> hrsWorked[1]  
+	     >> hrsWorked[2] >> hrsWorked[3] 
+             >> hrsWorked[4];
+      e_temp.setHours(hrsWorked);
+      infile >> hrlyWage; e_temp.setWage(hrlyWage);   
+      infile >> deductions; e_temp.setDeductions(deductions);  
+      empList.addEmployee(e_temp);
+      infile >> name; e_temp.setName(name);
+    }  
+
+  infile.close();  
+  infile.clear();  
+}   
+
+  
+void displayData()
+{
+  empList.writeData(cout);
+}
+
+void processThePayroll()  
+{  
+   // No further input is needed from the user.
+  // Simply call function that processes the list.
+  empList.processPayroll();
+
+}  
+  
+
+void changeWages()
+{ 
+  int i; float wage;  
+  cout << "Please enter id of the person:  ";
+  cin >> id;
+  i = empList.searchById(id);
+  if ( i!= -1)    {      cout << "Please input new hourly wage:";
+      cin >> wage;    
+ (empList.getEmployee(i)).setWage(wage);    }
+  else  
+  cout << "Sorry, there is no such employee \n";
+}
+
+void addNewEmployee()  
+{  
+  employee e_temp;  
+  float hrsWorked[5];
+  int deductions; float hrlyWage;
+  
+  cout << "Please enter name of the person:  ";  
+  cin >> name; e_temp.setName(name);
+  cout << "Please enter id of the person:  ";  
+  cin >> id; e_temp.setId(id);  
+  cout << "Please input hours worked (5 numbers): \n ";
+  cin >> hrsWorked[0] >> hrsWorked[1]  
+      >> hrsWorked[2] >> hrsWorked[3] 
+      >> hrsWorked[4];
+  e_temp.setHours(hrsWorked);
+  cout << "Please input hourly wage:  ";  
+  cin >> hrlyWage; e_temp.setWage(hrlyWage);   
+  cout << "Please input deductions:  ";  
+  cin >> deductions; e_temp.setDeductions(deductions);  
+  if (empList.addEmployee(e_temp))
+    cout << "Successfully added  employee \n";
+  else
+    cout << "Sorry, the employee could not be added \n"; 
+}  
+
+void searchAnEmployee()
+{
+  char c; int j; float wage;
+  cout << "Please enter n/N to search by name and anything else to search by id:  ";
+  cin >> c;
+  if((c == 'n') || (c == 'N'))
+    {
+      cout << "Please enter name of the person:  ";
+      cin >> name;
+      j = empList.searchByName(name);
+    }
+  else
+    {
+      cout << "Please enter id of the person:  ";
+      cin >> id;
+      j = empList.searchById(id);
+    }
+  if (j!= -1)
+    empList.getEmployee(j).printPersonalInfo(cout);
+  else
+    cout << "Sorry, the employee could not be found \n";
+}
+
+  
+void printPayroll()  
+{  
+  int i;
+  cout << "Please enter name of output  file:  ";
+  cin >> output_file_name;
+  outfile.open(output_file_name);
+  cout << "Please enter 1 to print tabular and 2 to print report: ";
+  cin >> i;
+  if(i == 1)
+    empList.printTable(outfile);
+  else
+    empList.printReport(outfile);
+  outfile.close();
+  outfile.clear();
+}  
+  
+void saveInfo()  
+{  
+  cout << "Please enter name of the  new data file:  ";  
+  cin >> output_file_name;  
+  outfile.open(output_file_name);  
+  if ( !outfile)  
+    {  
+      // abandons operation with error mesg  
+      cout << "Could not open  file \n";  
+      outfile.close();  
+      outfile.clear();  
+      return;  
+    }  
+  empList.writeData(outfile);
+  outfile.close();
+  outfile.clear();
+}  
+  
+  
+/* ---------------------- start of Main Program -----------------------------*/  
+  
+  
+int main()  
+{  
+  
+  char choice;  
+    
+  showmenu();  
+  cout << "Please indicate your choice of operation (m for menu): ";  
+  cin >> choice;  
+  
+  while ((choice != 'e')&& (choice != 'E'))  
+    {  
+      switch(choice)  
+	{  
+	case 'l':  
+	case 'L': loadEmployees(); break;  
+        case 'd':
+	case 'D': displayData(); break;
+	case 'p':  
+	case 'P': processThePayroll();break;  
+	case 'c':  
+	case 'C': changeWages();break;  
+	case 'a':  
+	case 'A': addNewEmployee();break;  
+	case 's':  
+	case 'S': searchAnEmployee();break;  
+	case 'r':  
+	case 'R': printPayroll();break;  
+	case 'm':  
+	case 'M': showmenu();break;  
+	default : cout << "Not a valid choice" << endl;  
+	}  
+      cin.ignore(200, '\n'); cin.clear(); //clear out all input  
+      cout << "Please indicate your choice of operation (m for menu): ";  
+      cin >> choice;  
+    }  
+  saveInfo();  
+  cout << "Thank-you, good bye! \n";  
+}  
+  
